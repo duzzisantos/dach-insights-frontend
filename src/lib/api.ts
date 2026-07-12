@@ -55,4 +55,16 @@ export const api = {
   },
 };
 
+// For call sites that treat a 404 as "render notFound()" — any other failure (backend
+// down, 5xx, network error) rethrows instead of silently becoming a 404, so an outage
+// surfaces as an error page/log rather than a misleading "this page doesn't exist".
+export async function orNotFound<T>(promise: Promise<T>): Promise<T | null> {
+  try {
+    return await promise;
+  } catch (err) {
+    if (err instanceof ApiError && err.status === 404) return null;
+    throw err;
+  }
+}
+
 export { ApiError };

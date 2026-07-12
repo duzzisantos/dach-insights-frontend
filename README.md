@@ -33,6 +33,7 @@ Copy `.env.example` to `.env.local` and fill in:
 |---|---|---|---|
 | `NEXT_PUBLIC_API_URL` | **Yes** | `http://localhost:5080` | Base URL of the backend API, no trailing slash. Inlined into the client bundle at build time — in a same-origin reverse-proxy deployment (see `src/lib/api.ts`), set this to `""` and requests resolve as relative `/api/...` paths instead. |
 | `API_INTERNAL_URL` | No | `http://backend:8080` | Server-only override for where SSR/RSC fetches hit the backend (e.g. a Docker-network hostname). Falls back to `NEXT_PUBLIC_API_URL` if unset. Never sent to the client. |
+| `NEXT_PUBLIC_SITE_URL` | No | `https://dachinsights.example` | Public origin this app is served from. Used only to build absolute URLs in `sitemap.xml`/`robots.txt`. Defaults to `http://localhost:3000`. |
 
 ## Running it locally
 

@@ -12,12 +12,15 @@ COPY . .
 # reverse-proxy deployment — the browser then calls relative "/api/..." paths.
 ARG NEXT_PUBLIC_API_URL=""
 ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+# Base URL used only to build absolute URLs in sitemap.xml/robots.txt; falls back to
+# localhost if not passed at build time.
+ARG NEXT_PUBLIC_SITE_URL="http://localhost:3000"
+ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
 RUN npm run build
 
 FROM node:22-slim AS runner
 WORKDIR /app
 ENV NODE_ENV=production
-COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 COPY entrypoint.sh .

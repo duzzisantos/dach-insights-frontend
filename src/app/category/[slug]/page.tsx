@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { api } from "@/lib/api";
+import { api, orNotFound } from "@/lib/api";
 import { countryConfigs } from "@/lib/countries";
 import { ChartCard } from "@/components/ui/ChartCard";
 import { CountryTabs } from "@/components/ui/CountryTabs";
@@ -16,14 +16,14 @@ interface CategoryPageProps {
 
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const detail = await api.getCategory(slug).catch(() => null);
+  const detail = await orNotFound(api.getCategory(slug));
   if (!detail) return {};
   return { title: `${detail.category.name} — DACHInsights`, description: detail.category.description ?? undefined };
 }
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
   const { slug } = await params;
-  const detail = await api.getCategory(slug).catch(() => null);
+  const detail = await orNotFound(api.getCategory(slug));
   if (!detail) notFound();
 
   const { category, indicators } = detail;

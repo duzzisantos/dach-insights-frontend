@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { api } from "@/lib/api";
+import { api, orNotFound } from "@/lib/api";
 import { formatCompactNumber } from "@/lib/format";
 import { ChartCard } from "@/components/ui/ChartCard";
 import { StatTile } from "@/components/ui/StatTile";
@@ -15,7 +15,7 @@ interface RegionPageProps {
 
 export async function generateMetadata({ params }: RegionPageProps): Promise<Metadata> {
   const { region } = await params;
-  const profile = await api.getRegion(region).catch(() => null);
+  const profile = await orNotFound(api.getRegion(region));
   if (!profile) return {};
   return {
     title: `${profile.region.name} — DACHInsights`,
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: RegionPageProps): Promise<Met
 
 export default async function RegionPage({ params }: RegionPageProps) {
   const { region: slug } = await params;
-  const profile = await api.getRegion(slug).catch(() => null);
+  const profile = await orNotFound(api.getRegion(slug));
   if (!profile) notFound();
 
   const { region, highlights, categories } = profile;

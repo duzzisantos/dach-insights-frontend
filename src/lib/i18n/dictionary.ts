@@ -33,6 +33,12 @@ export const dictionary = {
     theme_toggle_to_light: "Switch to light mode",
     theme_toggle_to_dark: "Switch to dark mode",
     locale_toggle_label: "Language",
+    error_title: "Something went wrong",
+    error_message: "We couldn't load this page. This is usually temporary — try again in a moment.",
+    error_retry: "Try again",
+    not_found_title: "Page not found",
+    not_found_message: "The region, topic, or indicator you're looking for doesn't exist.",
+    not_found_home_link: "Back to home",
   },
   de: {
     nav_search_placeholder: "Regionen, Themen, Indikatoren suchen…",
@@ -66,6 +72,12 @@ export const dictionary = {
     theme_toggle_to_light: "Zum hellen Modus wechseln",
     theme_toggle_to_dark: "Zum dunklen Modus wechseln",
     locale_toggle_label: "Sprache",
+    error_title: "Etwas ist schiefgelaufen",
+    error_message: "Diese Seite konnte nicht geladen werden. Das ist meist vorübergehend — versuchen Sie es gleich noch einmal.",
+    error_retry: "Erneut versuchen",
+    not_found_title: "Seite nicht gefunden",
+    not_found_message: "Die gesuchte Region, das Thema oder der Indikator existiert nicht.",
+    not_found_home_link: "Zurück zur Startseite",
   },
 } as const satisfies Record<Locale, Record<string, string>>;
 

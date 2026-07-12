@@ -1,0 +1,187 @@
+@import "tailwindcss";
+
+:root {
+  --page-plane: #f9f9f7;
+  --surface-1: #fcfcfb;
+  --text-primary: #0b0b0b;
+  --text-secondary: #52514e;
+  --text-muted: #898781;
+  --gridline: #e1e0d9;
+  --baseline: #c3c2b7;
+  --border-hairline: rgba(11, 11, 11, 0.1);
+
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-bg-strong: rgba(255, 255, 255, 0.72);
+  --glass-border: rgba(11, 11, 11, 0.08);
+  --glass-shadow: 0 8px 32px rgba(31, 41, 55, 0.08);
+
+  --chart-glass-bg: rgba(255, 255, 255, 0.28);
+  --chart-glass-sheen: rgba(255, 255, 255, 0.55);
+  --chart-rim-1: rgba(42, 120, 214, 0.65);
+  --chart-rim-2: rgba(27, 175, 122, 0.55);
+
+  --series-blue: #2a78d6;
+  --series-aqua: #1baf7a;
+  --series-yellow: #eda100;
+  --series-green: #008300;
+  --series-violet: #4a3aa7;
+  --series-red: #e34948;
+  --series-magenta: #e87ba4;
+  --series-orange: #eb6834;
+
+  --status-good: #0ca30c;
+  --status-warning: #fab219;
+  --status-serious: #ec835a;
+  --status-critical: #d03b3b;
+
+  --bg-gradient: radial-gradient(circle at 15% 10%, #eaf1fd 0%, transparent 45%),
+    radial-gradient(circle at 85% 0%, #e9f9f2 0%, transparent 40%),
+    radial-gradient(circle at 50% 100%, #f3eefc 0%, transparent 55%), var(--page-plane);
+}
+
+.dark {
+  --page-plane: #0d0d0d;
+  --surface-1: #1a1a19;
+  --text-primary: #ffffff;
+  --text-secondary: #c3c2b7;
+  --text-muted: #898781;
+  --gridline: #2c2c2a;
+  --baseline: #383835;
+  --border-hairline: rgba(255, 255, 255, 0.1);
+
+  --glass-bg: rgba(24, 26, 32, 0.55);
+  --glass-bg-strong: rgba(24, 26, 32, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+
+  --chart-glass-bg: rgba(20, 26, 36, 0.32);
+  --chart-glass-sheen: rgba(255, 255, 255, 0.14);
+  --chart-rim-1: rgba(57, 135, 229, 0.75);
+  --chart-rim-2: rgba(25, 158, 112, 0.65);
+
+  --series-blue: #3987e5;
+  --series-aqua: #199e70;
+  --series-yellow: #c98500;
+  --series-green: #008300;
+  --series-violet: #9085e9;
+  --series-red: #e66767;
+  --series-magenta: #d55181;
+  --series-orange: #d95926;
+
+  --bg-gradient: radial-gradient(circle at 12% 8%, rgba(57, 135, 229, 0.16) 0%, transparent 45%),
+    radial-gradient(circle at 88% 4%, rgba(25, 158, 112, 0.14) 0%, transparent 42%),
+    radial-gradient(circle at 50% 105%, rgba(144, 133, 233, 0.16) 0%, transparent 55%), var(--page-plane);
+}
+
+@theme inline {
+  --color-page: var(--page-plane);
+  --color-surface: var(--surface-1);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-gridline: var(--gridline);
+  --color-baseline: var(--baseline);
+
+  --color-series-blue: var(--series-blue);
+  --color-series-aqua: var(--series-aqua);
+  --color-series-yellow: var(--series-yellow);
+  --color-series-green: var(--series-green);
+  --color-series-violet: var(--series-violet);
+  --color-series-red: var(--series-red);
+  --color-series-magenta: var(--series-magenta);
+  --color-series-orange: var(--series-orange);
+
+  --color-status-good: var(--status-good);
+  --color-status-warning: var(--status-warning);
+  --color-status-serious: var(--status-serious);
+  --color-status-critical: var(--status-critical);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--bg-gradient);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  font-family: var(--font-sans), system-ui, -apple-system, "Segoe UI", sans-serif;
+  min-height: 100vh;
+}
+
+/* Glassmorphism primitives -------------------------------------------------- */
+
+.glass-panel {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+}
+
+.glass-panel-strong {
+  background: var(--glass-bg-strong);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+}
+
+/* Chart glass: real-glass look — transparent body, bluish-green rim, top sheen. */
+.glass-chart {
+  position: relative;
+  isolation: isolate;
+  background: var(--chart-glass-bg);
+  border-radius: 1rem;
+  box-shadow:
+    0 8px 32px rgba(15, 35, 60, 0.18),
+    inset 0 1px 0 var(--chart-glass-sheen);
+  backdrop-filter: blur(28px) saturate(220%);
+  -webkit-backdrop-filter: blur(28px) saturate(220%);
+  overflow: hidden;
+}
+
+.glass-chart::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1.5px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, var(--chart-rim-1), var(--chart-rim-2) 45%, var(--chart-rim-1) 85%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.glass-chart::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.16) 0%, transparent 28%);
+  pointer-events: none;
+}
+
+.glass-nav {
+  background: var(--glass-bg-strong);
+  border-bottom: 1px solid var(--glass-border);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+}
+
+.text-gradient-accent {
+  background: linear-gradient(120deg, var(--series-blue), var(--series-aqua) 60%, var(--series-violet));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+::selection {
+  background: var(--series-blue);
+  color: white;
+}
+
+/* Tabular figures for anything that must align in columns (tables, axis ticks) */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
